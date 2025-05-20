@@ -9,17 +9,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Main page</title>
 </head>
 <body>
 	<h1>Bienvenido</h1>
 	<h2>Lista Huecos</h2>
 
 	<form action="<%= request.getContextPath() %>/control" method="POST">
-		<input type="hidden" name="accion" value="verhuecosuser"> <label
-			for="espacio">Selecciona un aula: </label> <select
-			name="<%= Constantes.PARAM_ESPACIO %>" id="espacio">
+		<input type="hidden" name="accion" value="verhuecosuser">
+		<label for="espacio">Selecciona un aula: </label>
+		<select name="<%= Constantes.PARAM_ESPACIO %>" id="espacio">
 			<% 	HashSet<Espacio> espacios = (HashSet<Espacio>) application.getAttribute("LISTA_ESPACIOS");
     	String espacioSeleccionado = request.getParameter(Constantes.PARAM_ESPACIO);
     	for (Espacio e : espacios) {
@@ -42,13 +42,11 @@
 	<ul>
 		<% for (Hueco h : huecos) { %>
 		<li><%= h.toString() %> <% if (!h.isOcupado()) { %>
-			<form action="<%= request.getContextPath() %>/control" method="post"
-				style="display: inline;">
-				<input type="hidden" name="accion" value="reservarhueco"> <input
-					type="hidden" name="espacio" value="<%= espacioSeleccionado %>">
-				<input type="hidden" name="fecha"
-					value="<%= h.getFecha().toString() %>"> <input
-					type="submit" value="Reservar">
+			<form action="<%= request.getContextPath() %>/control" method="post" style="display: inline;">
+				<input type="hidden" name="accion" value="reservarhueco">
+				<input type="hidden" name="espacio" value="<%= espacioSeleccionado %>">
+				<input type="hidden" name="fecha" value="<%= h.getFecha().toString() %>">
+				<input type="submit" value="Reservar">
 			</form> <% } else { %> <span style="color: gray;"> (No disponible)</span> <% } %>
 		</li>
 		<% } %>
@@ -67,8 +65,7 @@
 	<ul>
 		<% for (Hueco h : misReservas) { %>
 		<li><%= h.toString() %>
-			<form action="<%= request.getContextPath() %>/control" method="post"
-				style="display: inline;">
+			<form action="<%= request.getContextPath() %>/control" method="post" style="display: inline;">
 				<input type="hidden" name="accion" value="cancelarreserva">
 				<input type="hidden" name="fecha" value="<%= h.getFecha().toString() %>">
 				<input type="submit" value="Cancelar reserva">

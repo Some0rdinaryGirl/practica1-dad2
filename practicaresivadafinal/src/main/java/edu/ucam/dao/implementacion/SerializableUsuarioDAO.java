@@ -17,8 +17,14 @@ public class SerializableUsuarioDAO implements UsuarioDAO {
 	@Override
 	public void insertar(Usuario u) {
 		HashSet<Usuario> listaUsuarios = obtenerTodos();
-		listaUsuarios.add(u);
-		guardar(listaUsuarios);
+	    
+	    // Elimina cualquier usuario con el mismo nombre (ignora mayúsculas y espacios)
+	    listaUsuarios.removeIf(usuario -> usuario.getNombre().trim().equalsIgnoreCase(u.getNombre().trim()));
+	    
+	    // Añade el actualizado
+	    listaUsuarios.add(u);
+	    
+	    guardar(listaUsuarios);
 	}
 
 	@Override
